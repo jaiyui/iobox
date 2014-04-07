@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Session">
+	<select id="checkidduplicate" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM sessions WHERE id = #{id}
+ 	</select>
+
+	<select id="checknicknameduplicate" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM sessions WHERE nickname = #{nickname}
+ 	</select>
+
+	<insert id="create" parameterType="Session">
+		INSERT INTO sessions (
+			nickname, id, pwd
+		) VALUES (
+			#{nickname}, #{id}, #{pwd}
+		)
+ 	</insert>
+ 	
+	<update id="update" parameterType="Session">
+		UPDATE sessions SET 
+			<if test='pwd != null'>
+			pwd = #{pwd},
+			</if>
+			nickname = #{nickname} 
+		WHERE 
+			id = #{id}
+	</update>
+ 	
+	<select id="read" parameterType="String" resultType="Session">
+		SELECT idx, nickname, id, pwd, regDate, isActive FROM sessions WHERE id = #{id}
+ 	</select>
+
+ 	<update id="active" parameterType="int">
+		UPDATE sessions SET isActive = 0 WHERE id = #{id}
+	</update>
+ 	
+ 	<update id="inactive" parameterType="int">
+		UPDATE sessions SET isActive = 1 WHERE id = #{id}
+	</update>
+ 	
+	<select id="list" parameterType="HashMap" resultType="Session">
+		SELECT 
+			idx, nickname, id, pwd, regDate, isActive 
+		FROM 
+			sessions
+		WHERE
+			isActive = 0
+			<if test='keyword != null'>			
+				<if test="target == 'Name'"> 
+					AND nickname LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="target == 'Id'"> 
+					AND id LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>
+		ORDER BY 
+			id ASC 
+		LIMIT 
+			${page}, ${perPage} 
+ 	</select>	
+
+	<select id="getlistcount" parameterType="HashMap" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM
+			fellows
+		WHERE
+			isActive = 0
+			<if test='keyword != null'>			
+				<if test="target == 'Name'"> 
+					AND nickname LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="target == 'Id'"> 
+					AND id LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+			</if>		 
+ 	</select>	
+
+	<select id="verify" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*) AS foundCount FROM sessions WHERE id = "${id}" AND pwd = "${pwd}" 
+ 	</select>
+</mapper>
