@@ -12,10 +12,10 @@
 	    <div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 	        	<li id="menuIndex"><a href="/dashboard/view">Home</a></li>
-	        	<li id="menuTour"><a href="/tour/index">Software tour</a></li>
-	        	<li id="menuFAQ"><a href="/faq/index">FAQ</a></li>
-	        	<li id="menuSupport"><a href="/support/index">Support</a></li>
-	        	<li id="menuContact"><a href="/contact/index">Contact</a></li>
+	        	<li id="menuTour"><a href="/contents/softwaretour">Software tour</a></li>
+	        	<li id="menuFAQ"><a href="/contents/faq">FAQ</a></li>
+	        	<li id="menuSupport"><a href="/contents/support">Support</a></li>
+	        	<li id="menuContact"><a href="/contents/contact">Contact</a></li>
 			</ul>
 	        <ul class="nav navbar-right">
 			</ul>
