@@ -20,24 +20,13 @@
 	<context:property-placeholder location="classpath*:*.properties" />
 	
 	<!-- 빈등록(@Component,@Service,@Repository), 주입(@Autowired,@Inject,@Resource) -->
-	<context:component-scan base-package="net.secretnote.web">
+	<context:component-scan base-package="kr.co.iobox.web">
 		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
 	</context:component-scan>
 	
 	<!-- @Transactional사용 -->
 	<tx:annotation-driven />
 	<!-- <tx:annotation-driven transaction-manager="transactionManager"/>-->
-	
-    <bean id="dataSourceSession" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/juSession?autoReconnect=true&amp;useServerPrepStmts=true&amp;"/>
-	    <property name="username" value="jusession" />
-	    <property name="password" value="12345a" />
-        <property name="poolPreparedStatements" value="true" />
-        <property name="maxActive" value="10" />
-        <property name="maxIdle" value="10" />
-        <property name="maxWait" value="28800" />
-	</bean>	
 	
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -63,15 +52,6 @@
     
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
   		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
-
-    <bean id="sqlSessionFactorySession" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSourceSession" />
-        <property name="configLocation" value="classpath:/SqlMapConfig_session.xml" />
-    </bean>	
-
-	<bean id="sqlSessionSession" class="org.mybatis.spring.SqlSessionTemplate">
-  		<constructor-arg index="0" ref="sqlSessionFactorySession" />
 	</bean>
 
 </beans>

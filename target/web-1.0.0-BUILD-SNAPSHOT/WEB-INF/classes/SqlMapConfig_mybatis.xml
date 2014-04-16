@@ -5,12 +5,8 @@
 
 <configuration>
 	<typeAliases> 
-		<typeAlias alias="SecretKey" type="net.secretnote.web.secretKey.SecretKey" /> 
-		<typeAlias alias="Note" type="net.secretnote.web.note.Note" /> 
 	</typeAliases>
 
 	<mappers> 
-		<mapper resource="net/secretnote/web/mybatis/SecretKey.xml"/>
-		<mapper resource="net/secretnote/web/mybatis/Note.xml"/>
 	</mappers>
 </configuration>

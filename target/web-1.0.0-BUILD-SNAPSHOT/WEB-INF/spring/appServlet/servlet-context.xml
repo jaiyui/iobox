@@ -15,7 +15,7 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- 빈등록(@Controller) -->
-	<context:component-scan base-package="net.secretnote.web" use-default-filters="false">
+	<context:component-scan base-package="kr.co.iobox.web" use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
 	</context:component-scan>
 	
@@ -28,28 +28,33 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
+	<!-- Tiles 환경설정 파일  -->
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <beans:property name="definitions">
+            <beans:list>
+                <beans:value>/WEB-INF/tiles-def.xml</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>   
+	
+	<!-- Tiles View Resolver  -->
+    <beans:bean  id="tilesViewResolver" class="org.springbyexample.web.servlet.view.tiles2.TilesUrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springbyexample.web.servlet.view.tiles2.DynamicTilesView"/>
+        <beans:property name="prefix" value="/WEB-INF/views/"/>
+        <beans:property name="suffix" value=".jsp"/>
+        <beans:property name="tilesDefinitionName" value="default"/>
+        <beans:property name="tilesBodyAttributeName" value="body"/>
+        <beans:property name="tilesDefinitionDelimiter" value="."/>
+        <beans:property name="order" value="1" />
+    </beans:bean>
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- 타일즈2를 사용하기 위해 기본 뷰리졸버 주석
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+    	<beans:property name="order" value="2" />
 	</beans:bean>
-	-->
-	<!-- use tiles -->
- 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<beans:property name="definitions">
-			<beans:list>
-				<beans:value>/WEB-INF/tiles.xml</beans:value>
-			</beans:list>
-		</beans:property>
-		<beans:property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory"/>
-	</beans:bean>
- 
-	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
-	</beans:bean>
- 	<!-- use tiles -->
- 
+
 	<beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<beans:property name="messageConverters">
 			<beans:list>
@@ -67,10 +72,4 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 	
-	<mvc:interceptors> 
-		<mvc:interceptor>
-			<mvc:mapping path="/note/*" />
-			<beans:bean class="kr.co.iobox.web.session.CommonSession" />
-		</mvc:interceptor>
-	</mvc:interceptors>
  </beans:beans>

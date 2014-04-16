@@ -18,7 +18,6 @@
 	        	<li id="menuContact"><a href="/contact/index">Contact</a></li>
 			</ul>
 	        <ul class="nav navbar-right">
-	        	<li id="menuLogin"><a href="/session/index">Log In/Sign Up</a></li>
 			</ul>
 	        <ul class="nav navbar-right">
 	        	<li id="menuFellow"></li>
