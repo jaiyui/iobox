@@ -24,6 +24,19 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<servlet>
+	    <servlet-name>jsp</servlet-name>
+	    <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+	    <init-param>
+	        <param-name>checkInterval</param-name>
+	        <param-value>1</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>modificationTestInterval</param-name>
+	        <param-value>1</param-value>
+	    </init-param>
+	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>

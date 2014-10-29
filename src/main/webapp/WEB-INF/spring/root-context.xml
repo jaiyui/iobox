@@ -39,19 +39,5 @@
         <property name="maxWait" value="28800" />
 	</bean>	
 	
-	<!-- jdbc 트랜잭션처리  -->
-
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource" />
-
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:/SqlMapConfig_mybatis.xml" />
-    </bean>	
-    
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-  		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>
 
 </beans>

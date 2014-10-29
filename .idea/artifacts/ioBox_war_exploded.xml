@@ -2,6 +2,7 @@
   <artifact type="exploded-war" name="ioBox:war exploded">
     <output-path>$PROJECT_DIR$/target/ioBox.war</output-path>
     <root id="root">
+      <element id="javaee-facet-resources" facet="ioBox/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ioBox" />
@@ -59,7 +60,6 @@
           <element id="library" level="project" name="Maven: org.slf4j:jcl104-over-slf4j:1.5.0" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="ioBox/web/Web" />
     </root>
   </artifact>
 </component>
